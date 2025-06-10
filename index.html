@@ -9,21 +9,47 @@
       text-align: center;
       margin-top: 100px;
     }
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      cursor: pointer;
+
+    #loader {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <h1>Connect Your Wallet</h1>
   <p>To continue, please connect your crypto wallet.</p>
-  <button onclick="redirect()">Connect Wallet</button>
+  <button onclick="connectWallet()">Connect Wallet</button>
+
+  <div id="loader">
+    <p>Connecting...</p>
+    <div class="spinner"></div>
+  </div>
 
   <script>
-    function redirect() {
-      window.location.href = "unsupported.html";
+    function connectWallet() {
+      document.querySelector("button").disabled = true;
+      document.getElementById("loader").style.display = "block";
+
+      // Wait 20 seconds, then redirect
+      setTimeout(() => {
+        window.location.href = "unsupported.html";
+      }, 20000); // 20,000 milliseconds = 20 seconds
     }
   </script>
 </body>
