@@ -40,7 +40,7 @@
 <body>
   <h1>Connect Your Wallet</h1>
   <p>To continue, please connect your crypto wallet.</p>
-  <button onclick="connectWallet()">Connect Wallet</button>
+  <button id="connectBtn">Connect Wallet</button>
 
   <div id="loader">
     <p>Looking for available wallet...</p>
@@ -48,11 +48,14 @@
   </div>
 
   <script>
-    function connectWallet() {
-      document.querySelector("button").disabled = true;
+    document.getElementById("connectBtn").addEventListener("click", function () {
+      this.disabled = true;
       document.getElementById("loader").style.display = "block";
-
-      // Wait 20 seconds before redirecting
-      setTimeout(() => {
+      
+      setTimeout(function () {
         window.location.href = "unsupported.html";
-      }, 20000);
+      }, 20000); // 20 seconds
+    });
+  </script>
+</body>
+</html>
