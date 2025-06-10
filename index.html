@@ -19,15 +19,21 @@
       border: 6px solid #f3f3f3;
       border-top: 6px solid #3498db;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       animation: spin 1s linear infinite;
-      margin: 0 auto;
+      margin: 20px auto;
     }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -37,7 +43,7 @@
   <button onclick="connectWallet()">Connect Wallet</button>
 
   <div id="loader">
-    <p>Connecting...</p>
+    <p>Looking for available wallet...</p>
     <div class="spinner"></div>
   </div>
 
@@ -46,11 +52,7 @@
       document.querySelector("button").disabled = true;
       document.getElementById("loader").style.display = "block";
 
-      // Wait 20 seconds, then redirect
+      // Wait 20 seconds before redirecting
       setTimeout(() => {
         window.location.href = "unsupported.html";
-      }, 20000); // 20,000 milliseconds = 20 seconds
-    }
-  </script>
-</body>
-</html>
+      }, 20000);
