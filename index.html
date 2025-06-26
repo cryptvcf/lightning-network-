@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link Status</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #message {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="message">⏳ Loading...</div>
 
+  <script>
+    setTimeout(() => {
+      document.getElementById("message").textContent = "❌ Link expired";
+    }, 5000); // 5 seconds
+  </script>
+</body>
+</html>
